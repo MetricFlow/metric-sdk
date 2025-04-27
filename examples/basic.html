@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>MetricFlow SDK - Basic Example</title>
+  <script src="../dist/sdk.dev.js"></script>
+</head>
+<body>
+  <h1>Basic Implementation Example</h1>
+  <button id="track-btn">Track Button Click</button>
+  <button id="identify-btn">Identify User</button>
+
+  <script>
+    // Initialize SDK
+    metricflow.init('YOUR_DEV_API_KEY', {
+      debug: true,
+      logLevel: 'verbose'
+    });
+
+    // Track button click
+    document.getElementById('track-btn').addEventListener('click', () => {
+      metricflow.track('button_click', {
+        button_id: 'primary-cta',
+        page: 'homepage'
+      });
+      console.log('Event tracked! Check console for details.');
+    });
+
+    // Identify user
+    document.getElementById('identify-btn').addEventListener('click', () => {
+      metricflow.identify('user123', {
+        email: 'user@example.com',
+        plan: 'premium'
+      });
+      console.log('User identified!');
+    });
+  </script>
+</body>
+</html>
