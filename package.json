@@ -6,39 +6,46 @@
     "module": "dist/sdk.esm.js",
     "unpkg": "dist/sdk.min.js",
     "files": [
-      "dist"
+        "dist"
     ],
     "scripts": {
-      "clean": "rm -rf dist",
-      "build": "npm run clean && npm run build:dev && npm run build:prod && npm run build:esm",
-      "build:dev": "webpack --config webpack.config.js --mode development",
-      "build:prod": "webpack --config webpack.config.js --mode production",
-      "build:esm": "webpack --config webpack.esm.config.js --mode production",
-      "test": "jest",
-      "lint": "eslint src",
-      "prepublishOnly": "npm run build && npm test",
-      "start": "webpack serve --config webpack.dev.config.js"
+        "clean": "rm -rf dist",
+        "build": "npm run clean && webpack --mode production",
+        "test": "jest",
+        "lint": "eslint src",
+        "prepublishOnly": "npm run build && npm test",
+        "start": "webpack serve --config webpack.dev.config.js",
+        "dev": "webpack --mode development",
+        "watch": "tsc --watch"
     },
     "dependencies": {
-      "core-js": "^3.0.0",
-      "regenerator-runtime": "^0.13.0"
+        "core-js": "^3.0.0",
+        "regenerator-runtime": "^0.13.0",
+        "ts-loader": "^9.5.2"
     },
     "devDependencies": {
-      "@babel/core": "^7.0.0",
-      "@babel/preset-env": "^7.0.0",
-      "babel-loader": "^8.0.0",
-      "eslint": "^7.0.0",
-      "eslint-config-airbnb-base": "^14.0.0",
-      "eslint-plugin-import": "^2.0.0",
-      "jest": "^26.0.0",
-      "terser-webpack-plugin": "^5.0.0",
-      "webpack": "^5.0.0",
-      "webpack-cli": "^4.0.0",
-      "webpack-dev-server": "^4.0.0",
-      "webpack-merge": "^5.0.0"
+        "@babel/core": "^7.0.0",
+        "@babel/preset-env": "^7.0.0",
+        "@types/node": "^22.15.2",
+        "babel-loader": "^8.0.0",
+        "eslint": "^7.0.0",
+        "eslint-config-airbnb-base": "^14.0.0",
+        "eslint-plugin-import": "^2.0.0",
+        "html-webpack-plugin": "^5.6.3",
+        "@types/jest": "^29.5.12",
+        "jest": "^29.7.0",
+        "ts-jest": "^29.1.1",
+        "jest-environment-jsdom": "^29.7.0",
+        "jest-canvas-mock": "^2.4.0",
+        "terser-webpack-plugin": "^5.0.0",
+        "typescript": "^5.8.3",
+        "webpack": "^5.99.7",
+        "webpack-cli": "^6.0.1",
+        "webpack-merge": "^5.0.0",
+        "webpack-plugin-serve": "^1.6.0"
     },
     "browserslist": [
-      "> 0.25%",
-      "not dead"
+        "> 0.25%",
+        "not dead"
     ]
-  }
+}

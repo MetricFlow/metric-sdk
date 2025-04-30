@@ -1,55 +1,54 @@
 const path = require('path');
-const TerserPlugin = require('terser-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { WebpackPluginServe } = require('webpack-plugin-serve');
 
 module.exports = {
-  entry: './src/index.js',
+  entry: ['./src/index.ts'],
+  
   output: {
-    filename: 'sdk.js',
-    library: 'metricFlow',
-    libraryTarget: 'umd',
-    globalObject: 'this',
     path: path.resolve(__dirname, 'dist'),
+    filename: 'sdk.js',
+    library: 'metricFlow',  // Simple global variable assignment
+    libraryTarget: 'var',   // Direct window assignment
+    umdNamedDefine: false,
+    globalObject: 'this'
   },
+
+  plugins: [
+    new WebpackPluginServe({
+      port: 9000,
+      static:[
+        path.resolve(__dirname, 'dist'),
+        path.resolve(__dirname, 'examples'),
+      ],
+      liveReload: true,
+      waitForBuild: true,
+      host: '127.0.0.1'
+    })
+  ],
+
   module: {
     rules: [
       {
-        test: /\.js$/,
-        exclude: /node_modules/,
+        test: /\.ts$/,
         use: {
-          loader: 'babel-loader',
+          loader: 'ts-loader',
           options: {
-            presets: [
-              ['@babel/preset-env', {
-                useBuiltIns: 'usage',
-                corejs: 3,
-                targets: {
-                  browsers: ['> 0.25%', 'not dead']
-                }
-              }]
-            ]
+            compilerOptions: {
+              module: 'ESNext',
+              target: 'ES5',
+              noEmit: false
+            }
           }
-        }
+        },
+        exclude: /node_modules/
       }
     ]
   },
-  optimization: {
-    minimize: true,
-    minimizer: [
-      new TerserPlugin({
-        terserOptions: {
-          output: {
-            comments: false,
-          },
-        },
-        extractComments: false,
-      }),
-    ],
-  },
+
   resolve: {
-    extensions: ['.js'],
-    modules: [
-      path.resolve('./src'),
-      path.resolve('./node_modules')
-    ]
-  }
+    extensions: ['.ts', '.js']
+  },
+
+  watch: true
 };

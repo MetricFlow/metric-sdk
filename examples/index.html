@@ -2,7 +2,7 @@
 <html>
 <head>
   <title>MetricFlow SDK - Basic Example</title>
-  <script src="../dist/sdk.dev.js"></script>
+  <script src="/sdk.js"></script>
 </head>
 <body>
   <h1>Basic Implementation Example</h1>
@@ -11,6 +11,8 @@
 
   <script>
     // Initialize SDK
+    console.log(metricflow)
+    
     metricflow.init('YOUR_DEV_API_KEY', {
       debug: true,
       logLevel: 'verbose'
